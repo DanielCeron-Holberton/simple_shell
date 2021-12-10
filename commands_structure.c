@@ -18,7 +18,7 @@ int (*is_built_in(char **args))(char **tokenized)
 
 	while (commands_built[i].command != NULL)
 	{
-		if (strcmp(commands_built[i].command, args[0]) == 0)
+		if (_strcmp(commands_built[i].command, args[0]) == 0)
 			return (commands_built[i].command_func);
 		i++;
 	}

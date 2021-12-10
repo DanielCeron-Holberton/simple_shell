@@ -4,16 +4,15 @@
  * main - simple shell
  * @argc: argument counter
  * @argv: arguments
- * @env: environment variable
  * Return: 0
  */
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 	char *line = NULL, **tokenized = NULL;
 	int (*func_builtin)(char **);
 	int tty = 1, status = 1;
-	(void)(env);
+
 
 	signal(SIGINT, ctrl_c);
 
@@ -21,12 +20,12 @@ int main(int argc, char **argv, char **env)
 		tty = 0;
 
 	do {
-		if (tty == 1) /*Interactive Mode*/
-			write(STDOUT_FILENO, "($H3LL) -> ", 11);
+		if (tty == 1)
+			write(STDOUT_FILENO, SIGN_S, _strlen(SIGN_S));
 		fflush(stdin);
 		/* READ */
 		line = read_line();
-		/*TOKEN INPUT*/
+		/* TOKEN INPUT */
 		tokenized = tokenize_line(line);
 		/*Built-in || No-Built-In*/
 		if (tokenized[0])
@@ -81,7 +80,7 @@ char *read_line(void)
 void ctrl_c(int sig)
 {
 	(void)sig;
-	putchar('\n');
-	write(STDOUT_FILENO, "($H3LL) -> ", 11);
+	_putchar('\n');
+	write(STDOUT_FILENO, SIGN_S, _strlen(SIGN_S));
 }
 

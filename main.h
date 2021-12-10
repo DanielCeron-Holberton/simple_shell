@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+
 /**
  * struct builtin - new typedef for struct
  * @command: string with command
@@ -23,6 +24,12 @@ typedef struct builtin
 } builtin_t;
 
 extern char **environ;
+
+/*MACROS*/
+
+#define SIGN_S "($H3LL) -> "
+#define buffSTD 64
+#define PATH_E "PATH="
 
 /* handles ctrl_c */
 void ctrl_c(int sig);
@@ -49,14 +56,17 @@ char *read_line(void);
 char *look_for_path(char **tokens, int argc, char **argv, int tty, char *line);
 /*Tokenize PATH*/
 char **tokenize_path(char *line);
-/*filther path*/
+/* Filther path */
 char *filter_path(char **path, char *command);
-/* check if can be executed */
+/* Check if can be executed */
 int check_exec(char **tokens, int argc, char **argv, int tty, char *line);
-/*free elements*/
+/* Free elements*/
 void free_elements(char *free1, char **free2);
-/* handles errors */
+/* Handles errors */
 void error_handling(int ac, char **av, char **tokenized, int tty, char *line);
+
+/*Putchar*/
+int _putchar(char c);
 
 /*Strings*/
 int _strncmp(char *s1, char *s2, int n);

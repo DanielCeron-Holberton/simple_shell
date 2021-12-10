@@ -15,7 +15,7 @@ int exe_cd(char **args)
 		if (chdir(args[1]) != 0)
 			perror("Could not change directory");
 	}
-	printf("%s\n", args[1]);
+
 	return (1);
 }
 
@@ -28,6 +28,9 @@ int exe_cd(char **args)
 int exe_help(char **args)
 {
 	(void)(args);
+
+	printf("Type [Command] where command is the program that");
+	printf(" you want to execute\n");
 
 	return (1);
 }
@@ -53,12 +56,14 @@ int exe_exit(char **args)
 
 int exe_env(char **args)
 {
-	int i = 0;
+	int i = 0, j = 0;
 	(void)(args);
 
 	while (environ[i])
 	{
-		printf("%s\n", environ[i]);
+		for (j = 0; environ[i][j]; j++)
+			_putchar(environ[i][j]);
+		_putchar(10);
 		i++;
 	}
 	return (1);

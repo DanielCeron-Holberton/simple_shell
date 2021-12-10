@@ -16,7 +16,7 @@ char *look_for_path(char **tokens, int argc, char **argv, int tty, char *line)
 
 	while (environ[i])
 	{
-		if (_strncmp(environ[i], "PATH=", 6) == 0)
+		if (_strncmp(environ[i], PATH_E, strlen(PATH_E)) == 0)
 		{
 			return (environ[i]);
 		}
@@ -45,24 +45,23 @@ char *filter_path(char **path, char *command)
 
 	for (i = 0; path[i]; i++)
 	{
-		j = strlen(path[i]);
-		k = strlen(command);
+		j = _strlen(path[i]);
+		k = _strlen(command);
 		u = j + k + 2;
 		temp = malloc(sizeof(char) + u);
 		if (temp == NULL)
 			exit(-1);
 
-		strcpy(temp, path[i]);
+		_strcpy(temp, path[i]);
 
 		if (temp[j] != '/')
-			strcat(temp, "/");
-		strcat(temp, command);
-		strcat(temp, "\0");
+			_strcat(temp, "/");
+		_strcat(temp, command);
+		_strcat(temp, "\0");
+
 		if (access(temp, X_OK) == 0)
-		{
 			return (temp);
-		}
-		/*printf("%s\n\n", temp);*/
+
 		free(temp);
 	}
 	return (NULL);
@@ -111,4 +110,15 @@ int _strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (compare);
+}
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
 }

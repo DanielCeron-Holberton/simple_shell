@@ -12,27 +12,25 @@
 
 char *_strdup(char *str)
 {
-	int size = 0, i = 0;
-	char *newString;
+	char *dupe;
+	int i = 0;
+	int size;
 
 	if (str == NULL)
 		return (NULL);
 
-	for (; str[size]; size++)
+	for (size = 0; str[size]; size++)
 		;
 
-	newString = (char *)malloc((size++) * sizeof(char));
-
-	if (newString == NULL)
+	dupe = (char *)malloc(sizeof(char) * (size + 1));
+	if (dupe == NULL)
 		return (NULL);
 
-	else
+	for (; i <= size; i++)
 	{
-		for (i = 0; i < size; i++)
-			newString[i] = str[i];
+		dupe[i] = str[i];
 	}
-
-	return (newString);
+	return (dupe);
 }
 
 /**
@@ -46,14 +44,12 @@ char *_strdup(char *str)
  */
 int _strlen(char *s)
 {
-	int len = 0;
+	int i = 0;
 
-	while (*s != '\0')
-	{
-		s++;
-		len++;
-	}
-	return (len);
+	while (s[i])
+		i++;
+
+	return (i);
 }
 /**
  * _strcpy - Copy strings
@@ -63,10 +59,11 @@ int _strlen(char *s)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; src[i]; i++)
+	for (i = 0; src[i] != '\0'; i++)
 		dest[i] = src[i];
+
 	dest[i] = src[i];
 	return (dest);
 }
@@ -80,12 +77,13 @@ char *_strcpy(char *dest, char *src)
 
 char *_strcat(char *dest, char *src)
 {
-	int len = _strlen(dest);
-	int i = 0;
+	char *p = dest;
 
-	for (i = 0; src[i]; i++, len++)
-		dest[len] = src[i];
-
+	while (*p)
+		p++;
+	while (*src)
+		*p++ = *src++;
+	*p = '\0';
 	return (dest);
 }
 /**

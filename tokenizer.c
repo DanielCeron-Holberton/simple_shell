@@ -1,5 +1,5 @@
 #include "main.h"
-#define buffSTD 64
+
 
 /**
  * tokenize_line - tokenizes line of arguments
@@ -22,13 +22,6 @@ char **tokenize_line(char *line)
 		token[i] = temp_token;
 		i++;
 
-		if (i >= buff_std)
-		{
-			buff_std += buffSTD;
-			token = realloc(token, buff_std * sizeof(char *));
-			if (token == NULL)
-				exit(-1);
-		}
 		temp_token = strtok(NULL, " \t\n");
 	}
 	token[i] = NULL;
@@ -57,13 +50,6 @@ char **tokenize_path(char *line)
 		token[i] = temp_token;
 		i++;
 
-		if (i >= buff_std)
-		{
-			buff_std += buffSTD;
-			token = realloc(token, buff_std * sizeof(char *));
-			if (token == NULL)
-				exit(-1);
-		}
 		temp_token = strtok(NULL, ":");
 	}
 	temp_token = NULL;
